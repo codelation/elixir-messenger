@@ -3,12 +3,11 @@ defmodule Messenger.Mixfile do
 
   def project do
     [app: :messenger,
-     name: :codelation_messenger
+     name: "Codelation Messenger",
+     description: description(),
+     package: package(),
+     source_url: "https://github.com/codelation/elixir-messenger",
      version: "0.1.0",
-     build_path: "_build",
-     config_path: "config/config.exs",
-     deps_path: "deps",
-     lockfile: "mix.lock",
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -42,6 +41,24 @@ defmodule Messenger.Mixfile do
     [
       {:httpoison, "~> 0.11"},
       {:poison, "~> 3.1"}
+    ]
+  end
+
+  defp description do
+    """
+    Simple HTTP/HTTPS message handler for running tasks from other apps.  Used in combination to the Ruby Gem Codelation Messenger.
+    This allows for both async and sync message sending between the apps for use on Heroku.
+    """
+  end
+
+  defp package do
+    # These are the default files included in the package
+    [
+      name: :codelation_messenger,
+      files: ["lib", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+      maintainers: ["Jake Humphrey"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/codelation/elixir-messenger"}
     ]
   end
 end
