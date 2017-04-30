@@ -1,8 +1,8 @@
-defmodule Messenger.Mixfile do
+defmodule CodelationMessenger.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :messenger,
+    [app: :codelation_messenger,
      name: "Codelation Messenger",
      description: description(),
      package: package(),

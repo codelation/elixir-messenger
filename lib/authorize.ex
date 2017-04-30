@@ -1,4 +1,4 @@
-defmodule Messenger.Authorize do
+defmodule CodelationMessenger.Authorize do
   @moduledoc """
   Authorizes a request by checking if the Authorization Bearer Header contains
   the token specifiec in its config.
@@ -10,7 +10,7 @@ defmodule Messenger.Authorize do
   @doc """
   Returns `Plug.Conn` that has either already returned a response of 401 or not at all.
   This will look in the conn's HEADERS and validates the Authorization Bearer Token is the
-  same as in the config 
+  same as in the config
   """
   def authorize(conn) do
     case find_token(conn) do
@@ -38,7 +38,7 @@ defmodule Messenger.Authorize do
   end
 
   defp validate_token(token) do
-    Application.get_env(:messenger, :api_token) == token
+    Application.get_env(:codelation_messenger, :api_token) == token
   end
 
   defp auth_error!(conn) do

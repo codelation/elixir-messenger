@@ -1,6 +1,6 @@
-defmodule MessengerTest do
+defmodule CodelationMessengerTest do
   use ExUnit.Case
-  doctest Messenger
+  doctest CodelationMessenger
 
   test "the truth" do
     assert 1 + 1 == 2

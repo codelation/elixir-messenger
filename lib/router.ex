@@ -1,4 +1,4 @@
-defmodule Messenger.Router do
+defmodule CodelationMessenger.Router do
   @moduledoc """
   Forward requests to this router by `forward "/message", to: Messenger.Router`.  This will capture
   POST requests on the `/message/:task` route calling the task specified.  In your config, you will need
@@ -31,10 +31,10 @@ defmodule Messenger.Router do
   plug(:dispatch)
 
   post "/:task" do
-    case Messenger.Authorize.authorize(conn) do
+    case CodelationMessenger.Authorize.authorize(conn) do
       %Plug.Conn{state: :sent} -> conn
       conn ->
-        case Application.get_env(:messenger, :task_module).handle(task, conn.body_params) do
+        case Application.get_env(:codelation_messenger, :task_module).handle(task, conn.body_params) do
           {:ok, resp} -> send_unless(conn, 200, resp)
           {:error, resp} -> send_unless(conn, 500, resp)
           resp -> send_unless(conn, 500, %{error: "Invalid return value from task", task: task, response: resp})
