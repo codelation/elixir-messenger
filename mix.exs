@@ -55,7 +55,7 @@ defmodule Messenger.Mixfile do
     # These are the default files included in the package
     [
       name: :codelation_messenger,
-      files: ["lib", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+      files: ["lib", "mix.exs", "README*", "LICENSE*"],
       maintainers: ["Jake Humphrey"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/codelation/elixir-messenger"}
