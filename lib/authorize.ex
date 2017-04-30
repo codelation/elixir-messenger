@@ -1,10 +1,18 @@
-defmodule Messenger.AuthorizePlug do
+defmodule Messenger.Authorize do
+  @moduledoc """
+  Authorizes a request by checking if the Authorization Bearer Header contains
+  the token specifiec in its config.
+  """
+
   import Plug.Conn
   require Logger
 
-  def init(options), do: options
-
-  def call(conn, _opts) do
+  @doc """
+  Returns `Plug.Conn` that has either already returned a response of 401 or not at all.
+  This will look in the conn's HEADERS and validates the Authorization Bearer Token is the
+  same as in the config 
+  """
+  def authorize(conn) do
     case find_token(conn) do
       {:ok, :valid} -> conn
       _otherwise   -> auth_error!(conn)

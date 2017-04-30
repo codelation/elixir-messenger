@@ -1,4 +1,22 @@
 defmodule Messenger.Router do
+  @moduledoc """
+  Forward requests to this router by `forward "/message", to: Messenger.Router`.  This will capture
+  POST requests on the `/message/:task` route calling the task specified.  In your config, you will need
+  to add the following options:
+
+  ```
+  config :messenger,
+    api_token: System.get_env("API_TOKEN"),
+    task_module: YourTaskModule
+  ```
+
+  You will need to define a task module that has a `handle(message, data)` function.  This function
+  needs to return either {:ok, %{}} or {:error, %{}}.  If not, this will automatically return a 500 error.
+
+  You can send messages to this router by sending a `POST` request with a `JSON` body and an
+  `Authorization Bearer token` header.
+
+  """
   use Plug.Router
   require Logger
 
@@ -13,7 +31,7 @@ defmodule Messenger.Router do
   plug(:dispatch)
 
   post "/:task" do
-    case Messenger.AuthorizePlug.call(conn, %{}) do
+    case Messenger.Authorize.authorize(conn) do
       %Plug.Conn{state: :sent} -> conn
       conn ->
         case Application.get_env(:messenger, :task_module).handle(task, conn.body_params) do
