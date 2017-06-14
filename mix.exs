@@ -39,8 +39,9 @@ defmodule CodelationMessenger.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
+      {:cowboy, ">= 1.0.0"},
       {:plug, "~> 1.3"},
-      {:httpoison, "~> 0.11"},
+      {:httpoison, "0.11.1"},
       {:poison, "~> 3.1"},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
